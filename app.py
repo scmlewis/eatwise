@@ -35,25 +35,32 @@ st.set_page_config(
     layout="wide"
 )
 
-# Force selectbox visibility
+# Fix sidebar selectboxes only
 st.markdown("""
 <style>
-    /* Override selectbox styling for visibility */
-    .stSelectbox [data-baseweb="select"] > div {
-        background-color: white !important;
+    /* Sidebar select boxes - white bg, dark text */
+    .stSidebar [data-baseweb="select"] > div {
+        background-color: #FFFFFF !important;
+        border-radius: 10px !important;
     }
     
-    .stSelectbox [data-baseweb="select"] * {
+    .stSidebar [data-baseweb="select"] span,
+    .stSidebar [data-baseweb="select"] div {
         color: #0D2818 !important;
-        font-weight: 500 !important;
     }
     
-    .stMultiSelect [data-baseweb="select"] > div {
-        background-color: white !important;
+    /* Dropdown menus (global) */
+    [role="listbox"] {
+        background-color: #FFFFFF !important;
     }
     
-    .stMultiSelect [data-baseweb="select"] * {
+    [role="listbox"] li {
+        background-color: #FFFFFF !important;
         color: #0D2818 !important;
+    }
+    
+    [role="listbox"] li:hover {
+        background-color: #E8F5E9 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -495,44 +502,7 @@ st.markdown("""
     [data-baseweb="popover"] {
         background-color: #FFFFFF !important;
     }
-
-    /* CRITICAL FIX: Sidebar dropdown text visibility - MORE SPECIFIC */
-    .stSidebar [data-baseweb="select"] span,
-    .stSidebar [data-baseweb="select"] div[class*="ValueContainer"],
-    .stSidebar [data-baseweb="select"] div[class*="SingleValue"] {
-        color: #0D2818 !important;
-        font-weight: 500 !important;
-    }
-
-    /* Dropdown menu items when opened (global, but with priority for dark text) */
-    [data-baseweb="popover"] [data-baseweb="menu"] li {
-        background-color: #FFFFFF !important;
-        color: #0D2818 !important;
-    }
-
-    [data-baseweb="popover"] [data-baseweb="menu"] li:hover {
-        background-color: #E8F5E9 !important;
-        color: #1B5E20 !important;
-    }
-
-    /* Placeholder text in sidebar selects only */
-    .stSidebar [data-baseweb="select"] [class*="Placeholder"] {
-        color: #6B8F6B !important;
-        opacity: 1 !important;
-    }
-
-    /* Don't affect main content tabs */
-    .stTabs [data-baseweb="tab"] {
-        color: #A5D6A7 !important;
-        border-bottom: 3px solid transparent !important;
-        font-weight: 600 !important;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        color: #C8E6C9 !important;
-        border-bottom-color: var(--primary-light) !important;
-    }
-
+         
 </style>
 """, unsafe_allow_html=True)
 
