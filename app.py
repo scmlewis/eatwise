@@ -45,19 +45,19 @@ st.markdown("""
         --primary: #2E7D32;         /* vibrant green */
         --primary-light: #4CAF50;   /* lighter green */
         --accent: #66BB6A;          /* soft green accent */
-        --text-dark: #0D2818;       /* DARKER green text for better contrast */
-        --text-muted: #2C4A2C;      /* DARKER muted green-gray */
-        --bg-light: #F1F8F1;        /* very light green background */
-        --bg-primary: #E8F5E9;      /* light green background */
-        --card: #FFFFFF;
+        --text-light: #E8F5E9;      /* light text for dark bg */
+        --text-muted: #C8E6C9;      /* muted light text */
+        --bg-dark: #0D3B0D;         /* dark background */
+        --bg-dark-alt: #1B5E20;     /* alternate dark bg */
+        --card-dark: #1B3A1B;       /* dark card background */
         --success: #43A047;         /* success green */
     }
 
-    /* Global font + background */
+    /* FORCE DARK MODE */
     html, body, [class*='stApp'] {
         font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-        background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-primary) 50%, #F1F8F1 100%);
-        color: var(--text-dark);
+        background: linear-gradient(135deg, #0D3B0D 0%, #1B5E20 50%, #0D3B0D 100%) !important;
+        color: #E8F5E9 !important;
     }
 
     /* Sidebar base styling */
@@ -68,7 +68,7 @@ st.markdown("""
         background: linear-gradient(180deg, #1B5E20 0%, #2E7D32 50%, #1B5E20 100%) !important;
     }
 
-    /* Sidebar text colors (compact) - ENHANCED CONTRAST */
+    /* Sidebar text colors - WHITE for high contrast */
     .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar label, .stSidebar .stMarkdown {
         color: #FFFFFF !important;
         font-weight: 600 !important;
@@ -78,48 +78,73 @@ st.markdown("""
     }
 
     .stSidebar .stMarkdown p, .stSidebar .stCaption {
-        color: #E8F5E9 !important;  /* LIGHTER for better contrast */
+        color: #E8F5E9 !important;
         font-size: 0.78rem !important;
         margin: 0.18rem 0 0.18rem 0 !important;
     }
 
-    /* Sidebar inputs */
-    .stSidebar [data-baseweb="input"], 
-    .stSidebar [data-baseweb="textarea"], 
-    .stSidebar [data-baseweb="select"] {
-        background-color: #FFFFFF !important;  /* WHITE background for inputs */
-        border-color: #4CAF50 !important;
-        color: #0D2818 !important;  /* DARK text */
-    }
-
-    /* Sidebar select/multiselect */
-    .stSidebar [data-baseweb="base-input"] input {
-        background-color: #FFFFFF !important;  /* WHITE background */
-        color: #0D2818 !important;  /* DARK text */
+    /* FIXED: Sidebar dropdowns - no white edges, proper border-radius */
+    .stSidebar [data-baseweb="select"] > div {
+        background-color: #FFFFFF !important;
         border: 2px solid #4CAF50 !important;
-        border-radius: 8px !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
     }
 
-    /* Hero header */
+    .stSidebar [data-baseweb="select"] > div > div {
+        background-color: #FFFFFF !important;
+        color: #0D2818 !important;
+        border-radius: 10px !important;
+    }
+
+    /* Select dropdown text */
+    .stSidebar [data-baseweb="select"] span {
+        color: #0D2818 !important;
+    }
+
+    /* Multiselect boxes */
+    .stSidebar [data-baseweb="tag"] {
+        background-color: #4CAF50 !important;
+        color: #FFFFFF !important;
+        border-radius: 6px !important;
+    }
+
+    /* Text inputs in sidebar */
+    .stSidebar [data-baseweb="input"], 
+    .stSidebar [data-baseweb="textarea"] {
+        background-color: #FFFFFF !important;
+        border: 2px solid #4CAF50 !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+    }
+
+    .stSidebar [data-baseweb="base-input"] input,
+    .stSidebar textarea {
+        background-color: #FFFFFF !important;
+        color: #0D2818 !important;
+        border-radius: 10px !important;
+    }
+
+    /* Hero header - dark mode style */
     .header-container{
         max-width: 1100px;
         margin: 1.2rem auto 0.8rem auto;
         padding: 1.5rem 1.6rem;
         border-radius: 16px;
-        background: linear-gradient(135deg, rgba(46,125,50,0.12), rgba(76,175,80,0.08));
-        border: 2px solid rgba(46,125,50,0.15);
+        background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(102,187,106,0.12));
+        border: 2px solid rgba(76,175,80,0.25);
         display: flex;
         align-items: center;
         gap: 1.2rem;
-        box-shadow: 0 8px 24px rgba(27,94,32,0.08);
+        box-shadow: 0 8px 24px rgba(27,94,32,0.25);
     }
 
     .hero-icon{
         font-size: 2.8rem;
-        background: linear-gradient(135deg, rgba(46,125,50,0.14), rgba(76,175,80,0.1));
+        background: linear-gradient(135deg, rgba(76,175,80,0.25), rgba(102,187,106,0.15));
         padding: 0.8rem;
         border-radius: 14px;
-        border: 2px solid rgba(46,125,50,0.1);
+        border: 2px solid rgba(76,175,80,0.2);
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -129,7 +154,7 @@ st.markdown("""
         font-family: 'Poppins', 'Inter', sans-serif;
         font-weight: 700;
         font-size: 2.1rem;
-        color: #0D2818;  /* DARKER for contrast */
+        color: #E8F5E9 !important;
         margin: 0;
         line-height: 1.05;
     }
@@ -137,57 +162,58 @@ st.markdown("""
     .sub-header{
         margin: 0.2rem 0 0 0;
         font-size: 0.95rem;
-        color: #2C4A2C;  /* DARKER muted */
+        color: #C8E6C9 !important;
         font-weight: 500;
     }
 
-    /* Card styles for responses - Modernized */
+    /* Card styles for responses - Dark mode */
     .recommendation-box, .nutrition-analysis-box{
-        background: var(--card);
+        background: #1B3A1B !important;
+        color: #E8F5E9 !important;
         padding: 1.5rem;
         border-radius: 14px;
-        border: 2px solid rgba(46,125,50,0.12);
+        border: 2px solid rgba(76,175,80,0.25);
         border-left: 6px solid var(--primary);
-        box-shadow: 0 10px 28px rgba(27,94,32,0.08);
+        box-shadow: 0 10px 28px rgba(27,94,32,0.25);
         margin: 1.2rem 0;
         transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
-        background: linear-gradient(to right, rgba(46,125,50,0.02), #FFFFFF);
+        background: linear-gradient(to right, rgba(76,175,80,0.1), #1B3A1B) !important;
     }
     .recommendation-box:hover, .nutrition-analysis-box:hover{
         transform: translateY(-6px);
-        box-shadow: 0 16px 40px rgba(27,94,32,0.12);
-        border-color: rgba(46,125,50,0.25);
+        box-shadow: 0 16px 40px rgba(27,94,32,0.35);
+        border-color: rgba(76,175,80,0.35);
     }
 
-    .recommendation-box { border-left-color: var(--primary); }
+    .recommendation-box { border-left-color: var(--primary-light); }
     .nutrition-analysis-box { border-left-color: var(--success); }
 
-    /* Modernized result presentation */
+    /* Result presentation - Dark mode */
     .result-header {
         font-family: 'Poppins', 'Inter', sans-serif;
         font-size: 1.15rem;
         font-weight: 700;
-        color: #0D2818;  /* DARKER */
+        color: #C8E6C9 !important;
         margin-bottom: 0.8rem;
-        border-bottom: 3px solid var(--primary);
+        border-bottom: 3px solid var(--primary-light);
         padding-bottom: 0.6rem;
     }
 
     .result-item {
-        background: linear-gradient(90deg, rgba(46,125,50,0.04), rgba(76,175,80,0.02));
+        background: linear-gradient(90deg, rgba(76,175,80,0.12), rgba(102,187,106,0.08));
         padding: 1rem 1.2rem;
         margin: 0.8rem 0;
         border-radius: 10px;
-        border-left: 4px solid var(--primary);
+        border-left: 4px solid var(--primary-light);
         transition: all 0.2s ease;
     }
     .result-item:hover {
-        background: linear-gradient(90deg, rgba(46,125,50,0.08), rgba(76,175,80,0.05));
+        background: linear-gradient(90deg, rgba(76,175,80,0.18), rgba(102,187,106,0.12));
         transform: translateX(4px);
     }
 
     .result-label {
-        color: #0D2818;  /* DARKER */
+        color: #A5D6A7 !important;
         font-weight: 700;
         font-size: 0.95rem;
         text-transform: uppercase;
@@ -196,31 +222,32 @@ st.markdown("""
     }
 
     .result-value {
-        color: #0D2818;  /* DARKER for readability */
+        color: #E8F5E9 !important;
         font-size: 1rem;
         line-height: 1.6;
         margin-top: 0.4rem;
     }
 
-    /* Ensure text inside result-value is also dark */
+    /* Ensure text inside result-value is light */
     .result-value p, .result-value li, .result-value strong, .result-value em {
-        color: #0D2818 !important;
+        color: #E8F5E9 !important;
     }
 
     /* Button styling */
     .stButton>button{
-        background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+        background: linear-gradient(180deg, var(--primary-light), var(--primary));
         color: white !important;
         border: none;
         padding: 10px 16px;
         border-radius: 10px;
         font-weight: 600;
-        box-shadow: 0 8px 20px rgba(27,94,32,0.18);
+        box-shadow: 0 8px 20px rgba(27,94,32,0.3);
         transition: all 0.24s ease;
     }
     .stButton>button:hover {
-        box-shadow: 0 12px 28px rgba(27,94,32,0.25);
+        box-shadow: 0 12px 28px rgba(27,94,32,0.4);
         transform: translateY(-2px);
+        background: linear-gradient(180deg, #66BB6A, var(--primary-light));
     }
     .stButton>button[disabled]{
         opacity: 0.5;
@@ -228,24 +255,24 @@ st.markdown("""
         cursor: not-allowed;
     }
 
-    /* Inputs and textareas */
+    /* Main content area inputs - Dark mode */
     textarea, input[type='text'], [data-baseweb="base-input"] input {
         border-radius: 10px !important;
-        border: 2px solid rgba(46,125,50,0.25) !important;  /* MORE visible border */
-        background-color: #FFFFFF !important;  /* Pure white */
-        color: #0D2818 !important;  /* DARK text */
+        border: 2px solid rgba(76,175,80,0.4) !important;
+        background-color: #1B3A1B !important;
+        color: #E8F5E9 !important;
         padding: 11px 12px !important;
         transition: all 0.2s ease !important;
     }
     textarea:focus, input[type='text']:focus, [data-baseweb="base-input"] input:focus {
-        border-color: var(--primary) !important;
-        box-shadow: 0 0 0 3px rgba(46,125,50,0.1) !important;
+        border-color: var(--primary-light) !important;
+        box-shadow: 0 0 0 3px rgba(76,175,80,0.2) !important;
     }
 
-    /* Placeholder text */
+    /* Placeholder text - Dark mode */
     textarea::placeholder, input::placeholder {
-        color: #6B8F6B !important;  /* Medium contrast for placeholders */
-        opacity: 0.8 !important;
+        color: #A5D6A7 !important;
+        opacity: 0.7 !important;
     }
 
     /* Slider styling */
@@ -253,25 +280,25 @@ st.markdown("""
         background: linear-gradient(90deg, var(--primary-light), var(--success)) !important;
     }
 
-    /* Tabs spacing */
+    /* Tabs - Dark mode */
     .stTabs [data-baseweb="tab-list"] { gap: 1.4rem; }
     .stTabs [data-baseweb="tab"] {
-        color: #2C4A2C !important;  /* DARKER */
+        color: #A5D6A7 !important;
         border-bottom: 3px solid transparent !important;
         font-weight: 600 !important;
     }
     .stTabs [aria-selected="true"] {
-        color: #1B5E20 !important;  /* DARKEST green */
-        border-bottom-color: var(--primary) !important;
+        color: #C8E6C9 !important;
+        border-bottom-color: var(--primary-light) !important;
     }
 
-    /* Info box styling */
+    /* Info/Alert boxes - Dark mode */
     .stInfo {
-        background: linear-gradient(135deg, rgba(76,175,80,0.12), rgba(46,125,50,0.08)) !important;
+        background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(46,125,50,0.12)) !important;
         border-left: 5px solid var(--success) !important;
         border-radius: 10px !important;
         padding: 1rem 1.2rem !important;
-        color: #0D2818 !important;  /* DARK text */
+        color: #E8F5E9 !important;
     }
 
     .stAlert {
@@ -279,25 +306,26 @@ st.markdown("""
     }
 
     .stSuccess {
-        background: linear-gradient(135deg, rgba(67,160,71,0.12), rgba(46,125,50,0.08)) !important;
+        background: linear-gradient(135deg, rgba(67,160,71,0.2), rgba(46,125,50,0.12)) !important;
         border-left: 5px solid var(--success) !important;
-        color: #0D2818 !important;
+        color: #E8F5E9 !important;
     }
 
     .stWarning {
-        background: linear-gradient(135deg, rgba(251,192,45,0.12), rgba(251,192,45,0.08)) !important;
-        border-left: 5px solid #F57C00 !important;  /* Darker warning color */
-        color: #3E2723 !important;  /* Dark brown text */
+        background: linear-gradient(135deg, rgba(251,192,45,0.2), rgba(251,140,0,0.15)) !important;
+        border-left: 5px solid #FB8C00 !important;
+        color: #FFF3E0 !important;
     }
 
-    /* Expander styling */
+    /* Expander - Dark mode */
     .stExpander {
-        border: 2px solid rgba(46,125,50,0.15) !important;
+        border: 2px solid rgba(76,175,80,0.25) !important;
         border-radius: 10px !important;
+        background: rgba(27,58,27,0.5) !important;
     }
     
     .stExpander summary {
-        color: #0D2818 !important;  /* DARK text */
+        color: #E8F5E9 !important;
         font-weight: 600 !important;
     }
 
@@ -307,10 +335,10 @@ st.markdown("""
         height: 3px !important;
     }
 
-    /* Metric Cards */
+    /* Metric Cards - Dark mode */
     .metric-card {
-        background: linear-gradient(135deg, rgba(76,175,80,0.12), rgba(46,125,50,0.06));
-        border: 2px solid rgba(76,175,80,0.2);
+        background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(46,125,50,0.12));
+        border: 2px solid rgba(76,175,80,0.3);
         border-radius: 12px;
         padding: 1rem;
         margin: 0.6rem 0;
@@ -319,17 +347,17 @@ st.markdown("""
     }
     .metric-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(46,125,50,0.12);
+        box-shadow: 0 8px 20px rgba(46,125,50,0.25);
     }
     .metric-value {
         font-size: 1.8rem;
         font-weight: 700;
-        color: #1B5E20;  /* DARKER */
+        color: #C8E6C9;
         margin: 0;
     }
     .metric-label {
         font-size: 0.8rem;
-        color: #2C4A2C;  /* DARKER */
+        color: #A5D6A7;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-top: 0.3rem;
@@ -347,45 +375,45 @@ st.markdown("""
         font-weight: 600;
         border: none;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(46,125,50,0.18);
+        box-shadow: 0 4px 12px rgba(46,125,50,0.3);
         transition: all 0.2s ease;
     }
     .quick-pill:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(46,125,50,0.25);
+        box-shadow: 0 6px 16px rgba(46,125,50,0.4);
     }
     
-    /* Pill-style headers for main sections */
+    /* Pill-style headers */
     .pill-header {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+        background: linear-gradient(90deg, var(--primary), var(--primary-light));
         color: #FFFFFF !important;
         padding: 12px 18px;
         border-radius: 999px;
         font-weight: 800;
         margin-bottom: 0.8rem;
-        box-shadow: 0 10px 30px rgba(27,94,32,0.18);
+        box-shadow: 0 10px 30px rgba(27,94,32,0.3);
         font-size: 1.18rem;
-        border: 1px solid rgba(255,255,255,0.06);
-        text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        border: 1px solid rgba(255,255,255,0.1);
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
-    /* Tips Widget (compact) */
+    /* Tips Widget */
     .tips-widget {
-        background: linear-gradient(135deg, rgba(102,187,106,0.15), rgba(76,175,80,0.10));
-        border-left: 4px solid var(--primary);
+        background: linear-gradient(135deg, rgba(102,187,106,0.2), rgba(76,175,80,0.15));
+        border-left: 4px solid var(--primary-light);
         border-radius: 8px;
         padding: 0.6rem;
         margin: 0.6rem 0;
         font-size: 0.82rem;
         line-height: 1.5;
-        color: #FFFFFF !important;  /* WHITE text for sidebar */
+        color: #FFFFFF !important;
     }
     .tips-widget .tip-title {
         font-weight: 700;
-        color: #FFFFFF !important;  /* WHITE */
+        color: #FFFFFF !important;
         margin-bottom: 0.25rem;
         display: flex;
         align-items: center;
@@ -395,82 +423,54 @@ st.markdown("""
     .tips-widget .daily-label {
         display: inline-block;
         background: linear-gradient(90deg, #FFFFFF, #E8F5E9);
-        color: #1B5E20 !important;  /* DARK green text */
+        color: #1B5E20 !important;
         padding: 6px 10px;
         border-radius: 999px;
         font-weight: 700;
         margin-bottom: 0.45rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         font-size: 0.95rem;
     }
 
     /* Footer */
     .app-footer{ 
         text-align: center; 
-        color: #2C4A2C;  /* DARKER */
+        color: #A5D6A7 !important;
         padding: 1.5rem 0;
-        border-top: 2px solid rgba(46,125,50,0.15);
+        border-top: 2px solid rgba(76,175,80,0.25);
     }
 
-    /* Streamlit native elements - force dark text */
+    /* Force all Streamlit text elements to light color */
     .stMarkdown, .stText, p, span, div {
-        color: #0D2818 !important;
+        color: #E8F5E9 !important;
     }
 
     /* Radio buttons and checkboxes labels */
     .stRadio label, .stCheckbox label {
-        color: #0D2818 !important;
+        color: #E8F5E9 !important;
         font-weight: 500 !important;
     }
 
-    /* Dark mode adjustments */
-    @media (prefers-color-scheme: dark) {
-        html, body, [class*='stApp'] {
-            background: linear-gradient(135deg, #0D3B0D 0%, #1B5E20 50%, #0D3B0D 100%);
-            color: #E8F5E9;
-        }
-        .header-container { 
-            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(102,187,106,0.12));
-            box-shadow: 0 8px 24px rgba(27,94,32,0.25);
-        }
-        .main-header { color: #E8F5E9; }
-        .sub-header { color: #C8E6C9; }
-        .recommendation-box, .nutrition-analysis-box { 
-            background: #1B3A1B; 
-            color: #E8F5E9;
-            border-color: rgba(76,175,80,0.25);
-            background: linear-gradient(to right, rgba(76,175,80,0.1), #1B3A1B);
-        }
-        .result-header { color: #C8E6C9; }
-        .result-item {
-            background: linear-gradient(90deg, rgba(76,175,80,0.12), rgba(102,187,106,0.08));
-        }
-        .result-label { color: #A5D6A7; }
-        .result-value, .result-value p, .result-value li, .result-value strong, .result-value em { 
-            color: #E8F5E9 !important; 
-        }
-        .stInfo { 
-            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(46,125,50,0.12)) !important;
-            color: #E8F5E9 !important;
-        }
-        textarea, input[type='text'], [data-baseweb="base-input"] input {
-            background-color: #1B3A1B !important;
-            border-color: rgba(76,175,80,0.4) !important;
-            color: #E8F5E9 !important;
-        }
-        .stMarkdown, .stText, p, span, div {
-            color: #E8F5E9 !important;
-        }
-        .stRadio label, .stCheckbox label {
-            color: #E8F5E9 !important;
-        }
-        .stTabs [data-baseweb="tab"] {
-            color: #A5D6A7 !important;
-        }
-        .stTabs [aria-selected="true"] {
-            color: #C8E6C9 !important;
-        }
-        .app-footer { color: #A5D6A7; }
+    /* File uploader */
+    .stFileUploader {
+        background: #1B3A1B !important;
+        border: 2px dashed rgba(76,175,80,0.4) !important;
+        border-radius: 10px !important;
+    }
+
+    .stFileUploader label {
+        color: #E8F5E9 !important;
+    }
+
+    /* Download button */
+    .stDownloadButton button {
+        background: linear-gradient(180deg, var(--primary-light), var(--primary)) !important;
+        color: white !important;
+    }
+
+    /* Ensure selectbox dropdowns are visible */
+    [data-baseweb="popover"] {
+        background-color: #FFFFFF !important;
     }
 
 </style>
