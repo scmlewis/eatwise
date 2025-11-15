@@ -45,8 +45,8 @@ st.markdown("""
         --primary: #2E7D32;         /* vibrant green */
         --primary-light: #4CAF50;   /* lighter green */
         --accent: #66BB6A;          /* soft green accent */
-        --text-dark: #1B3A1B;       /* dark green text */
-        --text-muted: #4A6741;      /* muted green-gray */
+        --text-dark: #0D2818;       /* DARKER green text for better contrast */
+        --text-muted: #2C4A2C;      /* DARKER muted green-gray */
         --bg-light: #F1F8F1;        /* very light green background */
         --bg-primary: #E8F5E9;      /* light green background */
         --card: #FFFFFF;
@@ -68,16 +68,17 @@ st.markdown("""
         background: linear-gradient(180deg, #1B5E20 0%, #2E7D32 50%, #1B5E20 100%) !important;
     }
 
-    /* Sidebar text colors (compact) */
+    /* Sidebar text colors (compact) - ENHANCED CONTRAST */
     .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar label, .stSidebar .stMarkdown {
         color: #FFFFFF !important;
         font-weight: 600 !important;
         margin: 0.18rem 0 0.22rem 0 !important;
         font-size: 1rem !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
     }
 
     .stSidebar .stMarkdown p, .stSidebar .stCaption {
-        color: #C8E6C9 !important;
+        color: #E8F5E9 !important;  /* LIGHTER for better contrast */
         font-size: 0.78rem !important;
         margin: 0.18rem 0 0.18rem 0 !important;
     }
@@ -86,15 +87,15 @@ st.markdown("""
     .stSidebar [data-baseweb="input"], 
     .stSidebar [data-baseweb="textarea"], 
     .stSidebar [data-baseweb="select"] {
-        background-color: #E8F5E9 !important;
+        background-color: #FFFFFF !important;  /* WHITE background for inputs */
         border-color: #4CAF50 !important;
-        color: var(--text-dark) !important;
+        color: #0D2818 !important;  /* DARK text */
     }
 
     /* Sidebar select/multiselect */
     .stSidebar [data-baseweb="base-input"] input {
-        background-color: #E8F5E9 !important;
-        color: var(--text-dark) !important;
+        background-color: #FFFFFF !important;  /* WHITE background */
+        color: #0D2818 !important;  /* DARK text */
         border: 2px solid #4CAF50 !important;
         border-radius: 8px !important;
     }
@@ -128,7 +129,7 @@ st.markdown("""
         font-family: 'Poppins', 'Inter', sans-serif;
         font-weight: 700;
         font-size: 2.1rem;
-        color: var(--primary-dark);
+        color: #0D2818;  /* DARKER for contrast */
         margin: 0;
         line-height: 1.05;
     }
@@ -136,7 +137,7 @@ st.markdown("""
     .sub-header{
         margin: 0.2rem 0 0 0;
         font-size: 0.95rem;
-        color: var(--text-muted);
+        color: #2C4A2C;  /* DARKER muted */
         font-weight: 500;
     }
 
@@ -166,7 +167,7 @@ st.markdown("""
         font-family: 'Poppins', 'Inter', sans-serif;
         font-size: 1.15rem;
         font-weight: 700;
-        color: var(--primary-dark);
+        color: #0D2818;  /* DARKER */
         margin-bottom: 0.8rem;
         border-bottom: 3px solid var(--primary);
         padding-bottom: 0.6rem;
@@ -186,7 +187,7 @@ st.markdown("""
     }
 
     .result-label {
-        color: var(--primary-dark);
+        color: #0D2818;  /* DARKER */
         font-weight: 700;
         font-size: 0.95rem;
         text-transform: uppercase;
@@ -195,16 +196,21 @@ st.markdown("""
     }
 
     .result-value {
-        color: var(--text-dark);
+        color: #0D2818;  /* DARKER for readability */
         font-size: 1rem;
-        line-height: 1.5;
+        line-height: 1.6;
         margin-top: 0.4rem;
+    }
+
+    /* Ensure text inside result-value is also dark */
+    .result-value p, .result-value li, .result-value strong, .result-value em {
+        color: #0D2818 !important;
     }
 
     /* Button styling */
     .stButton>button{
         background: linear-gradient(180deg, var(--primary), var(--primary-dark));
-        color: white;
+        color: white !important;
         border: none;
         padding: 10px 16px;
         border-radius: 10px;
@@ -225,15 +231,21 @@ st.markdown("""
     /* Inputs and textareas */
     textarea, input[type='text'], [data-baseweb="base-input"] input {
         border-radius: 10px !important;
-        border: 2px solid rgba(46,125,50,0.15) !important;
-        background-color: #F9FFF7 !important;
-        color: var(--text-dark) !important;
+        border: 2px solid rgba(46,125,50,0.25) !important;  /* MORE visible border */
+        background-color: #FFFFFF !important;  /* Pure white */
+        color: #0D2818 !important;  /* DARK text */
         padding: 11px 12px !important;
         transition: all 0.2s ease !important;
     }
     textarea:focus, input[type='text']:focus, [data-baseweb="base-input"] input:focus {
         border-color: var(--primary) !important;
         box-shadow: 0 0 0 3px rgba(46,125,50,0.1) !important;
+    }
+
+    /* Placeholder text */
+    textarea::placeholder, input::placeholder {
+        color: #6B8F6B !important;  /* Medium contrast for placeholders */
+        opacity: 0.8 !important;
     }
 
     /* Slider styling */
@@ -244,21 +256,22 @@ st.markdown("""
     /* Tabs spacing */
     .stTabs [data-baseweb="tab-list"] { gap: 1.4rem; }
     .stTabs [data-baseweb="tab"] {
-        color: var(--text-muted) !important;
+        color: #2C4A2C !important;  /* DARKER */
         border-bottom: 3px solid transparent !important;
+        font-weight: 600 !important;
     }
     .stTabs [aria-selected="true"] {
-        color: var(--primary) !important;
+        color: #1B5E20 !important;  /* DARKEST green */
         border-bottom-color: var(--primary) !important;
     }
 
     /* Info box styling */
     .stInfo {
-        background: linear-gradient(135deg, rgba(76,175,80,0.08), rgba(46,125,50,0.04)) !important;
+        background: linear-gradient(135deg, rgba(76,175,80,0.12), rgba(46,125,50,0.08)) !important;
         border-left: 5px solid var(--success) !important;
         border-radius: 10px !important;
         padding: 1rem 1.2rem !important;
-        color: var(--text-dark) !important;
+        color: #0D2818 !important;  /* DARK text */
     }
 
     .stAlert {
@@ -266,19 +279,26 @@ st.markdown("""
     }
 
     .stSuccess {
-        background: linear-gradient(135deg, rgba(67,160,71,0.08), rgba(46,125,50,0.04)) !important;
+        background: linear-gradient(135deg, rgba(67,160,71,0.12), rgba(46,125,50,0.08)) !important;
         border-left: 5px solid var(--success) !important;
+        color: #0D2818 !important;
     }
 
     .stWarning {
-        background: linear-gradient(135deg, rgba(251,192,45,0.08), rgba(251,192,45,0.04)) !important;
-        border-left: 5px solid #FBC02D !important;
+        background: linear-gradient(135deg, rgba(251,192,45,0.12), rgba(251,192,45,0.08)) !important;
+        border-left: 5px solid #F57C00 !important;  /* Darker warning color */
+        color: #3E2723 !important;  /* Dark brown text */
     }
 
     /* Expander styling */
     .stExpander {
-        border: 2px solid rgba(46,125,50,0.12) !important;
+        border: 2px solid rgba(46,125,50,0.15) !important;
         border-radius: 10px !important;
+    }
+    
+    .stExpander summary {
+        color: #0D2818 !important;  /* DARK text */
+        font-weight: 600 !important;
     }
 
     /* Divider */
@@ -304,12 +324,12 @@ st.markdown("""
     .metric-value {
         font-size: 1.8rem;
         font-weight: 700;
-        color: var(--primary);
+        color: #1B5E20;  /* DARKER */
         margin: 0;
     }
     .metric-label {
         font-size: 0.8rem;
-        color: var(--text-muted);
+        color: #2C4A2C;  /* DARKER */
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-top: 0.3rem;
@@ -319,7 +339,7 @@ st.markdown("""
     .quick-pill {
         display: inline-block;
         background: linear-gradient(135deg, var(--primary-light), var(--accent));
-        color: white;
+        color: white !important;
         padding: 0.6rem 1rem;
         border-radius: 20px;
         margin: 0.4rem 0.4rem 0.4rem 0;
@@ -334,13 +354,14 @@ st.markdown("""
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(46,125,50,0.25);
     }
+    
     /* Pill-style headers for main sections */
     .pill-header {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
         background: linear-gradient(90deg, var(--primary-dark), var(--primary));
-        color: #ffffff;
+        color: #FFFFFF !important;
         padding: 12px 18px;
         border-radius: 999px;
         font-weight: 800;
@@ -348,23 +369,23 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(27,94,32,0.18);
         font-size: 1.18rem;
         border: 1px solid rgba(255,255,255,0.06);
-        text-shadow: 0 1px 0 rgba(0,0,0,0.12);
+        text-shadow: 0 1px 2px rgba(0,0,0,0.15);
     }
 
     /* Tips Widget (compact) */
     .tips-widget {
-        background: linear-gradient(135deg, rgba(102,187,106,0.10), rgba(76,175,80,0.06));
+        background: linear-gradient(135deg, rgba(102,187,106,0.15), rgba(76,175,80,0.10));
         border-left: 4px solid var(--primary);
         border-radius: 8px;
         padding: 0.6rem;
         margin: 0.6rem 0;
         font-size: 0.82rem;
-        line-height: 1.4;
-        color: var(--text-dark);
+        line-height: 1.5;
+        color: #FFFFFF !important;  /* WHITE text for sidebar */
     }
     .tips-widget .tip-title {
         font-weight: 700;
-        color: var(--primary-dark);
+        color: #FFFFFF !important;  /* WHITE */
         margin-bottom: 0.25rem;
         display: flex;
         align-items: center;
@@ -373,51 +394,83 @@ st.markdown("""
     }
     .tips-widget .daily-label {
         display: inline-block;
-        background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-        color: #ffffff;
+        background: linear-gradient(90deg, #FFFFFF, #E8F5E9);
+        color: #1B5E20 !important;  /* DARK green text */
         padding: 6px 10px;
         border-radius: 999px;
         font-weight: 700;
         margin-bottom: 0.45rem;
-        box-shadow: 0 8px 20px rgba(27,94,32,0.12);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         font-size: 0.95rem;
     }
 
     /* Footer */
     .app-footer{ 
         text-align: center; 
-        color: var(--text-muted); 
+        color: #2C4A2C;  /* DARKER */
         padding: 1.5rem 0;
-        border-top: 2px solid rgba(46,125,50,0.1);
+        border-top: 2px solid rgba(46,125,50,0.15);
+    }
+
+    /* Streamlit native elements - force dark text */
+    .stMarkdown, .stText, p, span, div {
+        color: #0D2818 !important;
+    }
+
+    /* Radio buttons and checkboxes labels */
+    .stRadio label, .stCheckbox label {
+        color: #0D2818 !important;
+        font-weight: 500 !important;
     }
 
     /* Dark mode adjustments */
     @media (prefers-color-scheme: dark) {
         html, body, [class*='stApp'] {
             background: linear-gradient(135deg, #0D3B0D 0%, #1B5E20 50%, #0D3B0D 100%);
-            color: #C8E6C9;
+            color: #E8F5E9;
         }
         .header-container { 
-            background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(102,187,106,0.08));
-            box-shadow: 0 8px 24px rgba(27,94,32,0.2);
+            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(102,187,106,0.12));
+            box-shadow: 0 8px 24px rgba(27,94,32,0.25);
         }
+        .main-header { color: #E8F5E9; }
+        .sub-header { color: #C8E6C9; }
         .recommendation-box, .nutrition-analysis-box { 
             background: #1B3A1B; 
-            color: #C8E6C9;
-            border-color: rgba(76,175,80,0.2);
-            background: linear-gradient(to right, rgba(76,175,80,0.06), #1B3A1B);
+            color: #E8F5E9;
+            border-color: rgba(76,175,80,0.25);
+            background: linear-gradient(to right, rgba(76,175,80,0.1), #1B3A1B);
         }
+        .result-header { color: #C8E6C9; }
         .result-item {
-            background: linear-gradient(90deg, rgba(76,175,80,0.08), rgba(102,187,106,0.04));
+            background: linear-gradient(90deg, rgba(76,175,80,0.12), rgba(102,187,106,0.08));
         }
-        .result-label { color: #81C784; }
-        .result-value { color: #C8E6C9; }
-        .stInfo { background: linear-gradient(135deg, rgba(76,175,80,0.15), rgba(46,125,50,0.08)) !important; }
+        .result-label { color: #A5D6A7; }
+        .result-value, .result-value p, .result-value li, .result-value strong, .result-value em { 
+            color: #E8F5E9 !important; 
+        }
+        .stInfo { 
+            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(46,125,50,0.12)) !important;
+            color: #E8F5E9 !important;
+        }
         textarea, input[type='text'], [data-baseweb="base-input"] input {
             background-color: #1B3A1B !important;
-            border-color: rgba(76,175,80,0.3) !important;
+            border-color: rgba(76,175,80,0.4) !important;
+            color: #E8F5E9 !important;
+        }
+        .stMarkdown, .stText, p, span, div {
+            color: #E8F5E9 !important;
+        }
+        .stRadio label, .stCheckbox label {
+            color: #E8F5E9 !important;
+        }
+        .stTabs [data-baseweb="tab"] {
+            color: #A5D6A7 !important;
+        }
+        .stTabs [aria-selected="true"] {
             color: #C8E6C9 !important;
         }
+        .app-footer { color: #A5D6A7; }
     }
 
 </style>
