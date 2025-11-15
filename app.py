@@ -473,6 +473,64 @@ st.markdown("""
         background-color: #FFFFFF !important;
     }
 
+/* CRITICAL FIX: Sidebar dropdown text visibility - COMPREHENSIVE */
+    
+    /* Target the selected value display in selectbox */
+    .stSidebar [data-baseweb="select"] > div > div,
+    .stSidebar [data-baseweb="select"] > div > div > div,
+    .stSidebar [data-baseweb="select"] span {
+        color: #0D2818 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Target all text inside sidebar select components */
+    .stSidebar [data-baseweb="select"] * {
+        color: #0D2818 !important;
+    }
+    
+    /* Multiselect selected items */
+    .stSidebar [data-baseweb="tag"] {
+        background-color: #4CAF50 !important;
+        color: #FFFFFF !important;
+    }
+    
+    .stSidebar [data-baseweb="tag"] span {
+        color: #FFFFFF !important;
+    }
+    
+    /* Dropdown popover menu items */
+    ul[role="listbox"] li,
+    [data-baseweb="menu"] li,
+    [data-baseweb="list"] > li {
+        background-color: #FFFFFF !important;
+        color: #0D2818 !important;
+    }
+
+    ul[role="listbox"] li:hover,
+    [data-baseweb="menu"] li:hover,
+    [data-baseweb="list"] > li:hover {
+        background-color: #E8F5E9 !important;
+        color: #1B5E20 !important;
+    }
+    
+    /* Selected item in dropdown */
+    ul[role="listbox"] li[aria-selected="true"],
+    [data-baseweb="menu"] li[aria-selected="true"] {
+        background-color: #C8E6C9 !important;
+        color: #1B5E20 !important;
+    }
+
+    /* Placeholder text */
+    .stSidebar [data-baseweb="select"] [class*="placeholder"] {
+        color: #6B8F6B !important;
+        opacity: 0.8 !important;
+    }
+    
+    /* Ensure dropdown arrow is visible */
+    .stSidebar [data-baseweb="select"] svg {
+        fill: #0D2818 !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 
