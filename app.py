@@ -35,6 +35,29 @@ st.set_page_config(
     layout="wide"
 )
 
+# Force selectbox visibility
+st.markdown("""
+<style>
+    /* Override selectbox styling for visibility */
+    .stSelectbox [data-baseweb="select"] > div {
+        background-color: white !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] * {
+        color: #0D2818 !important;
+        font-weight: 500 !important;
+    }
+    
+    .stMultiSelect [data-baseweb="select"] > div {
+        background-color: white !important;
+    }
+    
+    .stMultiSelect [data-baseweb="select"] * {
+        color: #0D2818 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Custom CSS for better styling (green-themed nutrition advisor)
 st.markdown("""
 <style>
@@ -473,62 +496,41 @@ st.markdown("""
         background-color: #FFFFFF !important;
     }
 
-/* CRITICAL FIX: Sidebar dropdown text visibility - COMPREHENSIVE */
-    
-    /* Target the selected value display in selectbox */
-    .stSidebar [data-baseweb="select"] > div > div,
-    .stSidebar [data-baseweb="select"] > div > div > div,
-    .stSidebar [data-baseweb="select"] span {
+    /* CRITICAL FIX: Sidebar dropdown text visibility - MORE SPECIFIC */
+    .stSidebar [data-baseweb="select"] span,
+    .stSidebar [data-baseweb="select"] div[class*="ValueContainer"],
+    .stSidebar [data-baseweb="select"] div[class*="SingleValue"] {
         color: #0D2818 !important;
         font-weight: 500 !important;
     }
-    
-    /* Target all text inside sidebar select components */
-    .stSidebar [data-baseweb="select"] * {
-        color: #0D2818 !important;
-    }
-    
-    /* Multiselect selected items */
-    .stSidebar [data-baseweb="tag"] {
-        background-color: #4CAF50 !important;
-        color: #FFFFFF !important;
-    }
-    
-    .stSidebar [data-baseweb="tag"] span {
-        color: #FFFFFF !important;
-    }
-    
-    /* Dropdown popover menu items */
-    ul[role="listbox"] li,
-    [data-baseweb="menu"] li,
-    [data-baseweb="list"] > li {
+
+    /* Dropdown menu items when opened (global, but with priority for dark text) */
+    [data-baseweb="popover"] [data-baseweb="menu"] li {
         background-color: #FFFFFF !important;
         color: #0D2818 !important;
     }
 
-    ul[role="listbox"] li:hover,
-    [data-baseweb="menu"] li:hover,
-    [data-baseweb="list"] > li:hover {
+    [data-baseweb="popover"] [data-baseweb="menu"] li:hover {
         background-color: #E8F5E9 !important;
         color: #1B5E20 !important;
     }
-    
-    /* Selected item in dropdown */
-    ul[role="listbox"] li[aria-selected="true"],
-    [data-baseweb="menu"] li[aria-selected="true"] {
-        background-color: #C8E6C9 !important;
-        color: #1B5E20 !important;
+
+    /* Placeholder text in sidebar selects only */
+    .stSidebar [data-baseweb="select"] [class*="Placeholder"] {
+        color: #6B8F6B !important;
+        opacity: 1 !important;
     }
 
-    /* Placeholder text */
-    .stSidebar [data-baseweb="select"] [class*="placeholder"] {
-        color: #6B8F6B !important;
-        opacity: 0.8 !important;
+    /* Don't affect main content tabs */
+    .stTabs [data-baseweb="tab"] {
+        color: #A5D6A7 !important;
+        border-bottom: 3px solid transparent !important;
+        font-weight: 600 !important;
     }
     
-    /* Ensure dropdown arrow is visible */
-    .stSidebar [data-baseweb="select"] svg {
-        fill: #0D2818 !important;
+    .stTabs [aria-selected="true"] {
+        color: #C8E6C9 !important;
+        border-bottom-color: var(--primary-light) !important;
     }
 
 </style>
