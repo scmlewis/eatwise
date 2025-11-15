@@ -430,6 +430,15 @@ st.markdown("""
         text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
+    /* History section headers - match pill header size */
+    h2, .stMarkdown h2 {
+        font-size: 1.18rem !important;
+        font-weight: 700 !important;
+        color: #E8F5E9 !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+            
     /* Tips Widget */
     .tips-widget {
         background: linear-gradient(135deg, rgba(102,187,106,0.2), rgba(76,175,80,0.15));
@@ -519,6 +528,23 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# Quick guide - Simpler version
+st.markdown("""
+<div style='max-width: 1100px; 
+            margin: 0 auto 1.5rem auto;
+            background: rgba(76, 175, 80, 0.1); 
+            border-left: 3px solid #4CAF50; 
+            padding: 1rem 1.5rem; 
+            border-radius: 6px;'>
+    <p style='color: #A5D6A7; margin: 0; font-size: 0.9rem;'>
+        <strong style='color: #C8E6C9;'>👋 Welcome to Eatwise!</strong><br>
+        • Set your preferences in the sidebar<br>
+        • Choose a tab below to get started<br>
+        • Ask questions or upload meal photos for instant insights
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # Initialize session state
 if 'recommendation_history' not in st.session_state:
@@ -805,16 +831,71 @@ with tab1:
     with col1:
         st.markdown("<div class='pill-header'>💬 Ask for Food Recommendations</div>", unsafe_allow_html=True)
 
-        # Quick action pills
+# Quick action pills - Context-aware based on health goal
         st.markdown("#### 💡 Quick Suggestions")
-        quick_suggestions = [
-            ("🥞 Breakfast", "What are some healthy breakfast options for my health goal?"),
-            ("💪 Post-Workout", "What should I eat after a workout?"),
-            ("🍱 Quick Lunch", "Suggest quick, healthy lunch options"),
-            ("🍴 Dinner", "What are some balanced dinner recipes?"),
-            ("🍌 Snacks", "Recommend healthy snacks"),
-        ]
-        
+
+        # Generate suggestions based on selected health goal
+        if health_goal == "Weight Loss":
+            quick_suggestions = [
+                ("🥗 Low-Cal Meals", "What are filling but low-calorie meals for weight loss?"),
+                ("🍎 Smart Snacks", "What snacks won't sabotage my weight loss goals?"),
+                ("🔥 Metabolism Boost", "What foods help boost metabolism for weight loss?"),
+            ]
+        elif health_goal == "Muscle Building":
+            quick_suggestions = [
+                ("💪 Protein Power", "What are the best high-protein meals for muscle gain?"),
+                ("🏋️ Post-Workout", "What's the ideal post-workout meal for recovery?"),
+                ("🥚 Breakfast Gains", "What's a protein-rich breakfast for muscle building?"),
+            ]
+        elif health_goal == "Keep Fit/Maintenance":
+            quick_suggestions = [
+                ("⚖️ Balanced Meals", "What are well-balanced meals for maintenance?"),
+                ("🏃 Active Lifestyle", "What should I eat to support an active lifestyle?"),
+                ("🍱 Meal Prep", "Suggest easy meal prep ideas for the week"),
+            ]
+        elif health_goal == "Heart Health":
+            quick_suggestions = [
+                ("❤️ Heart-Healthy Fats", "What are the best heart-healthy fats to include?"),
+                ("🧂 Low Sodium", "Suggest flavorful low-sodium meal options"),
+                ("🐟 Omega-3 Sources", "What are good omega-3 rich foods besides fish?"),
+            ]
+        elif health_goal == "Energy Boost":
+            quick_suggestions = [
+                ("⚡ Morning Energy", "What breakfast gives sustained energy all morning?"),
+                ("😴 Beat Afternoon Slump", "What should I eat to avoid the 3pm energy crash?"),
+                ("🔋 Pre-Workout Fuel", "What should I eat before a workout for energy?"),
+            ]
+        elif health_goal == "Diabetes Management":
+            quick_suggestions = [
+                ("📉 Blood Sugar Control", "What meals help stabilize blood sugar levels?"),
+                ("🍞 Low-GI Options", "What are good low-glycemic index food choices?"),
+                ("🥗 Balanced Carbs", "How should I balance carbs in my meals?"),
+            ]
+        elif health_goal == "High Protein Diet":
+            quick_suggestions = [
+                ("🥩 Protein Variety", "What are diverse protein sources beyond meat?"),
+                ("🌱 Plant Protein", "What are the best plant-based protein options?"),
+                ("🍳 High-Protein Breakfast", "What's a high-protein breakfast under 400 calories?"),
+            ]
+        elif health_goal == "Vegetarian/Vegan":
+            quick_suggestions = [
+                ("🌱 Protein Sources", "What are the best plant-based protein options?"),
+                ("💊 Nutrient Coverage", "How do I ensure I get B12, iron, and omega-3?"),
+                ("🥗 Complete Meals", "What are balanced vegan meal ideas?"),
+            ]
+        elif health_goal == "Low Carb Diet":
+            quick_suggestions = [
+                ("🥑 Keto-Friendly", "What are satisfying low-carb, high-fat meals?"),
+                ("🍞 Carb Substitutes", "What are good alternatives to bread, rice, and pasta?"),
+                ("🥗 Low-Carb Veggies", "What vegetables are lowest in carbs?"),
+            ]
+        else:  # General Healthy Eating (default)
+            quick_suggestions = [
+                ("🥞 Breakfast Ideas", "What are some nutritious breakfast options?"),
+                ("🍱 Quick Lunches", "Suggest quick and healthy lunch ideas"),
+                ("🍴 Dinner Recipes", "What are some balanced dinner recipes?"),
+            ]
+
         cols_pills = st.columns(len(quick_suggestions))
         for idx, (pill_label, suggestion_text) in enumerate(quick_suggestions):
             with cols_pills[idx]:
@@ -868,7 +949,7 @@ with tab1:
                         })
                         st.success("✅ Recommendations generated successfully!")
 
-    # Display recommendation history (each AI suggestion rendered as a separate card)
+# Display recommendation history (each AI suggestion rendered as a separate card)
     if st.session_state.recommendation_history:
         st.header("📜 Recommendation History")
         for idx, chat in enumerate(reversed(st.session_state.recommendation_history)):
@@ -878,23 +959,57 @@ with tab1:
                 st.markdown(f'<div class="result-header">✨ AI Recommendations</div>', unsafe_allow_html=True)
 
                 resp_text = chat.get("response", "") or ""
-                # Try to split numbered items (common LLM numbered list format)
-                parts = re.split(r"\n\s*\d+\.\s+", "\n" + resp_text)
-                parts = [p.strip() for p in parts if p and p.strip()]
+                
+                # Split by numbered items (1. 2. 3. etc.)
+                parts = re.split(r'\n(?=\d+\.\s+\*\*)', resp_text)
+                parts = [p.strip() for p in parts if p.strip()]
 
-                if not parts:
-                    # fallback: show whole response in one card
-                    st.markdown(f'<div class="recommendation-box"><div class="result-value">{resp_text}</div></div>', unsafe_allow_html=True)
+                # Filter out only the INTRO sentence (not "Why it fits")
+                intro_keywords = ['certainly', 'here are', 'sure thing', 'of course', 
+                                'glad to help', "i'd be happy", 'let me suggest']
+                
+                filtered_parts = []
+                for part in parts:
+                    # Skip only if it's a short intro sentence at the start
+                    is_intro = (
+                        len(part.split()) < 30 and
+                        any(kw in part.lower() for kw in intro_keywords) and
+                        not part.strip().startswith('**') and  # Not a titled section
+                        not re.match(r'^\d+\.', part.strip())  # Not a numbered item
+                    )
+                    if not is_intro:
+                        filtered_parts.append(part)
+
+                # Fallback if everything was filtered
+                if not filtered_parts:
+                    filtered_parts = parts
+
+                # Display recommendations
+                if not filtered_parts:
+                    # Absolute fallback: show whole response
+                    html_body = md_to_html(resp_text)
+                    st.markdown(f'<div class="recommendation-box"><div class="result-value">{html_body}</div></div>', 
+                              unsafe_allow_html=True)
                 else:
-                    for i, part in enumerate(parts, start=1):
+                    for part in filtered_parts:
                         lines = part.splitlines()
-                        title = lines[0].strip() if lines else f"Recommendation {i}"
-                        # clean simple markdown markers from title
-                        title_clean = title.strip().strip('*').strip()
+                        
+                        # Extract title (first line, remove numbering)
+                        title = lines[0].strip() if lines else "Recommendation"
+                        title_clean = re.sub(r'^\d+\.\s*', '', title)  # Remove "1. "
+                        title_clean = title_clean.strip('*').strip()   # Remove markdown stars
+                        
+                        # Extract body (everything after first line)
                         body = "\n".join(lines[1:]).strip() if len(lines) > 1 else ""
+                        
+                        # Convert to HTML (preserves "Why it fits" since it's in the body)
                         body_html = md_to_html(body)
+                        
                         st.markdown(
-                            f'<div class="recommendation-box"><div class="result-label">{title_clean}</div><div class="result-value">{body_html}</div></div>',
+                            f'''<div class="recommendation-box">
+                                <div class="result-label">{title_clean}</div>
+                                <div class="result-value">{body_html}</div>
+                            </div>''',
                             unsafe_allow_html=True
                         )
 
