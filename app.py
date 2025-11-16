@@ -921,8 +921,6 @@ with tab1:
             st.session_state.recommendation_history = []
             st.rerun()
 
-    # 'Current Settings' panel removed (redundant)
-
     # Handle recommendation submission
     if submit_button:
         if not user_query:
@@ -1136,7 +1134,7 @@ with tab2:
                             unsafe_allow_html=True
                         )
 
-# Footer: App disclaimer (moved back to footer as requested)
+# Footer: App disclaimer
 st.divider()
 st.markdown("""
 <div class="app-footer">
